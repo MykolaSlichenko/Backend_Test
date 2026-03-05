@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import temperatureRoutes from "./routes/temperature.routes";
+import { globalErrorHandler } from "./middleware/error.middleware";
 
 const app = express();
 const PORT = 3000;
@@ -19,6 +20,8 @@ app.get("/", (req: Request, res: Response) => {
 
 // Temperature routes
 app.use("/temperature", temperatureRoutes);
+
+app.use(globalErrorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
